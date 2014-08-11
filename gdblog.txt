@@ -1,0 +1,35 @@
+$ gdb ./a.out
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+For bug reporting instructions, please see:
+<http://bugs.launchpad.net/gdb-linaro/>...
+Reading symbols from /tmp/ii/a.out...done.
+(gdb) r
+Starting program: /tmp/ii/a.out
+warning: no loadable sections found in added symbol-file system-supplied DSO at 0x7ffff7ffa000
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Program received signal SIGILL, Illegal instruction.
+main () at /usr/local/libcxx-head/include/c++/v1/valarray:1222
+1222            *__t = *__s;
+(gdb) l
+1217    slice_array<_Tp>::operator=(const slice_array& __sa) const
+1218    {
+1219        value_type* __t = __vp_;
+1220        const value_type* __s = __sa.__vp_;
+1221        for (size_t __n = __size_; __n; --__n, __t += __stride_, __s += __sa.__stride_)
+1222            *__t = *__s;
+1223    }
+1224
+1225    template <class _Tp>
+1226    template <class _Expr>
+(gdb) bt
+#0  main () at /usr/local/libcxx-head/include/c++/v1/valarray:1222
+(gdb)
+
