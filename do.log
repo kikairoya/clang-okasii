@@ -1,0 +1,23 @@
++ LD_LIBRARY_PATH=/usr/local/gcc-4.8.2/lib64 /usr/local/llvm-head/bin/clang++ -g -c -emit-llvm prog.cc -std=c++11 -stdlib=libc++ -I /usr/local/libcxx-head/include/c++/v1/
+In file included from prog.cc:1:
+./valarray:1223:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+prog.cc:11:11: note: in instantiation of member function 'std::__1::slice_array<int>::operator=' requested here
+  result1 = result;
+          ^
+1 warning generated.
++ LD_LIBRARY_PATH=/usr/local/gcc-4.8.2/lib64 /usr/local/llvm-head/bin/llvm-dis prog.bc
++ LD_LIBRARY_PATH=/usr/local/gcc-4.8.2/lib64 /usr/local/llvm-head/bin/clang++ -g -c prog.cc -std=c++11 -stdlib=libc++ -I /usr/local/libcxx-head/include/c++/v1/ -Wall -Wextra
+In file included from prog.cc:1:
+./valarray:1223:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+prog.cc:11:11: note: in instantiation of member function 'std::__1::slice_array<int>::operator=' requested here
+  result1 = result;
+          ^
+1 warning generated.
++ LD_LIBRARY_PATH=/usr/local/gcc-4.8.2/lib64 /usr/local/llvm-head/bin/clang++ -g prog.o -stdlib=libc++ -L. -Wl,-rpath,/tmp/ii
++ objdump -SCrw ./a.out
++ ./a.out
+Illegal instruction
